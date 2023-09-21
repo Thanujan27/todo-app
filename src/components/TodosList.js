@@ -1,12 +1,13 @@
 import React from 'react'
 
-
 const TodosList = ({todos, setTodos, setEditTodo}) => {
+
     const handleArchive = (todo) => {
+        console.log(todo)
         setTodos(
             todos.map((item)=>{
                 if(item.id === todo.id) {
-                    return{...item, Archived: !item.Archived};
+                    return{...item, archived: !item.archived};
                 }
                 return item;
             })
@@ -18,7 +19,6 @@ const TodosList = ({todos, setTodos, setEditTodo}) => {
         const findTodo = todos.find((todo)=>todo.id === id);
         setEditTodo(findTodo);
     };
-
 
     const handleDelete = ({id})=>{
     var todo = todos.filter((todo)=>todo.id !== id);
@@ -34,12 +34,12 @@ const TodosList = ({todos, setTodos, setEditTodo}) => {
                 <input
                 type="text"
                 value={todo.title}
-                className={todo.Archived ? "Archive" : "list-item"}
+                className={todo.archived ? "Archive" : "list-item"}
                 onChange={(event)=>event.preventDefault()}
                 />
                 </div>
                 <div className="crud-controls">
-                <button className="button-Archive task-button" onClick={()=> handleArchive(todo)}>
+                <button className="button-Archive task-button" onClick={()=>{ handleArchive(todo)}}>
                         <i className="fa fa-check-circle"></i>
                     </button>
                     <button className="button-edit task-button" onClick={()=> handleEdit(todo)}>
